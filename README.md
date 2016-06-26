@@ -96,21 +96,21 @@ http://www.slideshare.net/MakotoIto2/unity-55337920
 - パッケージのインストール
  - それぞれのUnityPackageをD&Dしてください
   - SD ユニティちゃん
-   - http://unity-chan.com/download/releaseNote.php?id=SDUnityChan
+    - http://unity-chan.com/download/releaseNote.php?id=SDUnityChan
   - Google VR SDK
-   - https://developers.google.com/vr/unity/download
+    - https://developers.google.com/vr/unity/download
   - VR Sample
-   - https://www.assetstore.unity3d.com/en/#!/content/51519
+    - https://www.assetstore.unity3d.com/en/#!/content/51519
 
 ---
 ## 試しにAndroid/iOSで動くことを確認
 - シーンを開く
- - Assets/GoogleVR/DemoScenes/ControllerDemo/ControllerDemo
+  - Assets/GoogleVR/DemoScenes/ControllerDemo/ControllerDemo
 
 - ビルド設定
- - File→Build Settings を選択
- - 上記 Scenes In Build を一旦全部消して、
- - Add Open Scenesをクリックして追加
+  - File→Build Settings を選択
+  - 上記 Scenes In Build を一旦全部消して、
+  - Add Open Scenesをクリックして追加
 
 - 実機転送
   - 設定→開発者向けなんとか→USBデバッグ
@@ -123,29 +123,31 @@ http://www.slideshare.net/MakotoIto2/unity-55337920
 - 新規シーンのセットアップ
  - File → New Scene
  - File → Save Scene 名前は適当に「Step1」
- - GameObject → 3D Object → Plane
- - 歯車でリセット
+ 
+- 地平を作る
+ - GameObject → 3D Object → Plane で新規地平面を作る
+ - インスペクターの歯車アイコンをクリックして「Reset」を選択して位置をリセット
  - Scale (4,4,4)
 
-- 新規マテリアルを作る
+- 地平の新規マテリアルを作る
  - Project ビューで Assets で 
-  - Create → Material 
-  - で名前をPlaneMat
+   - Create → Material 
+   - で名前をPlaneMat
  - Texture を GoogleVR/DemoScenes/HeadsetDemo/GroundPlane に差し替え
-  - Tiling を X 40, Y 40
-  - ひとつの区切りが1mごとになっています
+   - Tiling を X 40, Y 40
+   - ひとつの区切りが1mごとになっています
 
 - SDユニティちゃん登場
  - Assets/UnityChan/SD_unitychan/Prefabs/SD_unitychan_humanoid.prefab をD&D
-  - Position (0,0,1) 
-  - Rotation (0, 180, 0)
-  - Idle Change オフ
-  - Face Update オフ
+   - Position (0,0,1) 
+   - Rotation (0, 180, 0)
+   - Idle Change オフ
+   - Face Update オフ
 
 - Google VR のカメラを利用 
  - MainCamera を削除
  - Assets/GoogleVR/Prefabs/GvrMain をD&D
-  - Position(0, 0.8, 0)
+   - Position(0, 0.8, 0)
 
 - ビルド
  - File→Build Settings
@@ -156,15 +158,15 @@ http://www.slideshare.net/MakotoIto2/unity-55337920
 - VR Sample のカメラを利用
  - GvrMain/Head/MainCamera をオフ
  - Assets/VRSampleScenes/Prefabs/Utils/MainCamera　を GvrMain/Head に D&D
-  - Position (0, 0, 0)
+   - Position (0, 0, 0)
 
 - ユニティちゃんの判定部分を作る
  - SD_unitychan_humanoid にAdd Component → Capsule Collider 
-  - Center (0, 0.5, 0)  Radius 0.25
+   - Center (0, 0.5, 0)  Radius 0.25
 
 - 視線に反応するスクリプトを作る
  - Add Component → VR Interactive Item 
-  - Add Component → MyInteractive と入力して、新規Component を増やす
+ - Add Component → MyInteractive と入力して、新規Component を増やす
    - 名前をMyInteractive.cs として、以下のプログラムをかく
 
 MyInteractive.cs
@@ -225,11 +227,11 @@ MyInteractive.cs
  - をD&Dします。もとにあった (先ほどオフにした)MainCameraのTransform の歯車アイコンをクリックして、
  - 「Copy Component」をクリックしてパラメーターを
 
-FlyerMovementController.cs
+- FlyerMovementController.cs
 ```
     Quaternion headRotation = InputTracking.GetLocalRotation (VRNode.Head);
 ```
-の次の行に
+ - の次の行に
 ```
     if ( head ) {
         headRotation = head.localRotation;
